@@ -17,13 +17,13 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from mainapp import views
+from mainapp.viewsets import guest_view, room_view, transaction_view
 
 router = DefaultRouter()
 
-router.register(r'guests', views.GuestsViewSet, basename='guests')
-router.register(r'rooms', views.RoomsViewSet, basename='rooms')
-router.register(r'transactions', views.TransactionsViewSet, basename='transactions')
+router.register(r'guests', guest_view.GuestsViewSet, basename='guests')
+router.register(r'rooms', room_view.RoomsViewSet, basename='rooms')
+router.register(r'transactions', transaction_view.TransactionsViewSet, basename='transactions')
 
 urlpatterns = [
     path("admin/", admin.site.urls),

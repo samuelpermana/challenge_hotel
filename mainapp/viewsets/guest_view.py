@@ -1,7 +1,11 @@
+
 from rest_framework import viewsets
 from rest_framework.decorators import action
-from .models import Guests, Rooms, Transactions
-from .serializers import GuestsSerializer, RoomsSerializer, TransactionsSerializer
+from ..models.room_model import  Rooms
+from ..models.guest_model import Guests
+from ..models.transaction_model import Transactions
+from mainapp.serializers.guest_serializer import GuestsSerializer
+from mainapp.serializers.transaction_serializer import  TransactionsSerializer
 from rest_framework.response import Response
 from django.utils import timezone
 
@@ -34,12 +38,3 @@ class GuestsViewSet(viewsets.ModelViewSet):
             guest_data['transactions'] = grouped_transactions
             data.append(guest_data)
         return Response(data)
-
-class RoomsViewSet(viewsets.ModelViewSet):
-    queryset = Rooms.objects.all()
-    serializer_class = RoomsSerializer
-
-class TransactionsViewSet(viewsets.ModelViewSet):
-    queryset = Transactions.objects.all()
-    serializer_class = TransactionsSerializer
-
